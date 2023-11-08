@@ -103,7 +103,6 @@ files:
     User=prometheus
     Group=prometheus
     WorkingDirectory=/opt/prometheus
-    EnvironmentFile=/opt/prometheus/.env
     ExecStart=/opt/prometheus/prometheus
     Restart=always
 
@@ -160,13 +159,11 @@ actions:
     #!/bin/sh
     set -eux
 
-    useradd -M -r -s /sbin/nologin prometheus
+    useradd -M -r -s /sbin/nologin prometheus -d /opt/prometheus
+    mkhomedir_helper prometheus
 
-    mkdir -p /opt/prometheus
     tar -xvzf /usr/share/prometheus/prometheus.tar.gz -C /opt/prometheus --strip-components 1
     rm /usr/share/prometheus/prometheus.tar.gz
-
-    chown -R prometheus: /opt/prometheus
   releases:
   - bookworm
 
