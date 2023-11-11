@@ -115,6 +115,7 @@ packages:
   cleanup: true
   sets:
   - packages:
+    - openssh-server
     - openssh-client
     - gettext-base
     action: install
